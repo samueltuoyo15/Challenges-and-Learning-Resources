@@ -1,0 +1,12 @@
+{
+  "name": "huffmanencoding",
+  "version": "1.0.0",
+  "main": "huffmanEncoding.js",
+  "type": "module",
+  "scripts": {
+    "start": "node huffmanEncoding.js"
+  },
+  "author": "Samuel Tuoyo",
+  "license": "ISC",
+  "description": ""
+}

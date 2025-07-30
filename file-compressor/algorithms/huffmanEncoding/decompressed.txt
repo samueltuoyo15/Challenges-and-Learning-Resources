@@ -1,0 +1,63 @@
+Compression
+
+Compression is the process of reducing the size of a file or data set, to occupy less storage space or allow for faster transmission over a network. It involves encoding data in a more compact representation, which can be restored to its original form when needed. Compression techniques are widely used in data storage, file archiving, and multimedia applications.
+
+Types of Compression
+
+1. Lossless Compression:
+This type of compression reduces the file size without any loss of data. The original data can be perfectly reconstructed from the compressed version. It is commonly used in scenarios where data integrity is critical, such as:
+- Text files
+- Databases
+- Executable files
+- Source code
+Examples of lossless compression algorithms:
+  - Run-Length Encoding (RLE)
+  - Huffman Coding
+  - Lempel-Ziv-Welch (LZW)
+  - DEFLATE (used in ZIP and PNG)
+
+2. Lossy Compression:
+This type of compression achieves higher compression ratios by removing some data that is less important or redundant. The original data cannot be perfectly reconstructed, but the difference is often imperceptible to human senses. It is commonly used for:
+- Images (JPEG)
+- Audio (MP3)
+- Video (MP4, H.264)
+Examples of lossy compression algorithms:
+  - JPEG (Discrete Cosine Transform based)
+  - MP3 (Perceptual encoding)
+  - MPEG/H.264 (Video compression)
+
+Algorithms Covered
+
+1. Run-Length Encoding (RLE):
+- A simple form of lossless compression.
+- It replaces sequences of the same data value with a count and a single value.
+- Best used for data with lots of repeating characters (e.g., "AAAABBB" becomes "4A3B").
+- Performs poorly on data with little to no repetition.
+
+2. Huffman Coding:
+- A variable-length prefix coding algorithm.
+- Frequently occurring symbols are assigned shorter codes.
+- Rare symbols are assigned longer codes.
+- Requires building a binary tree (Huffman Tree) based on symbol frequencies.
+- Used in many compression formats like DEFLATE, GZIP, and JPEG.
+
+Binary Trees (Brief Overview for Huffman Coding):
+- A binary tree is a hierarchical data structure where each node has up to two children (left and right).
+- In Huffman coding, leaf nodes represent characters and paths from root to leaf determine the binary code.
+- The total cost (in bits) is minimized by placing more frequent symbols closer to the root.
+
+More algorithms you can explore:
+- Arithmetic Encoding
+- Burrows-Wheeler Transform (used in BZIP2)
+- Dictionary-based compression (LZW, LZ77, LZ78)
+
+Key Concepts:
+- Entropy: A measure of the average information per symbol; used to understand the limits of compression.
+- Prefix codes: No code is a prefix of another (essential for lossless decoding).
+- Compression ratio: Original size / Compressed size.
+
+Use Cases:
+- Storing backups with minimal space.
+- Speeding up network transmissions.
+- Reducing load times in web and mobile apps.
+- Archiving large datasets.

@@ -1,0 +1,13 @@
+{
+  "name": "file-compressor",
+  "version": "1.0.0",
+  "main": "runLengthEncoding.js",
+  "type": "module",
+  "scripts": {
+    "start": "node runLengthEncoding.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

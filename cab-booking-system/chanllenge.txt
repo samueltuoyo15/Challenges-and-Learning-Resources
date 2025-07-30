@@ -1,0 +1,62 @@
+🧾 Problem Statement:
+Design a simple cab booking system where:
+
+Riders can book cabs.
+
+Drivers can register and become available.
+
+The system should assign the nearest available driver to a rider.
+
+The driver becomes unavailable once assigned.
+
+Trips can be started and ended.
+
+Upon ending a trip, the driver becomes available again.
+
+🎯 Functional Requirements:
+Register Driver(name, location) - Done
+Register Rider(name, location) - Done
+BookCab(riderId, destinationLocation) - Done
+StartTrip(tripId) - Done
+EndTrip(tripId) - Done
+GetDriverStatus(driverId) – available or on-trip Done
+GetRiderHistory(riderId) – list of completed trips - Done
+
+💡 System Behavior:
+Use Euclidean distance to calculate how "near" a driver is.
+
+A cab is assigned only if one is within 5 units of distance.
+
+One driver can serve one rider at a time.
+
+Trips are stored with:
+
+Trip ID
+
+Driver, Rider, Start, End locations
+
+Status: NotStarted, InProgress, Completed
+
+💾 Suggested Classes:
+Driver ✅
+
+Rider ✅
+
+Trip ✅
+
+CabBookingSystem (main interface to interact with) ✅
+
+⚙ Constraints:
+Console-based (you can make CLI calls like system.bookCab(riderId, dest)).
+
+No GUI or DB needed.
+Clean, testable code. Keep logic decoupled.
+Use plain JavaScript, TypeScript, Java, or Python — whichever you prefer.
+🧠 Concepts You’ll Practice:
+OOP (encapsulation, composition)
+Separation of concerns
+Searching/filtering with conditions (available + proximity)
+State tracking (trip status, driver status)
+Simple data modeling
+
+Extensibility (can later add surge pricing, OTP, ratings, etc.)

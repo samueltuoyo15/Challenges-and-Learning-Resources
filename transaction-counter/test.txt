@@ -1,0 +1,130 @@
+/*
+10-Minute Go Coding Challenge: Transaction Counter Service
+
+Problem:
+You're building a transaction monitoring service that tracks the number of transactions 
+processed per currency in real-time. Multiple goroutines will be calling your service 
+simultaneously to increment counters and retrieve current counts.
+
+Requirements:
+1. Implement a TransactionCounter that can:
+   - Increment the count for a specific currency
+   - Get the current count for a specific currency
+   - Get all currency counts as a map
+   - Reset all counters
+
+2. The service will be used by multiple goroutines concurrently
+3. All operations must be thread-safe
+
+Starter Code:
+*/
+
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+// TransactionCounter tracks transaction counts per currency
+type TransactionCounter struct {
+	// TODO: Add your fields here
+}
+
+// NewTransactionCounter creates a new counter instance
+func NewTransactionCounter() *TransactionCounter {
+	// TODO: Implement this
+	return nil
+}
+
+// Increment adds 1 to the count for the given currency
+func (tc *TransactionCounter) Increment(currency string) {
+	// TODO: Implement this
+}
+
+// GetCount returns the current count for a specific currency
+func (tc *TransactionCounter) GetCount(currency string) int {
+	// TODO: Implement this
+	return 0
+}
+
+// GetAllCounts returns a copy of all currency counts
+func (tc *TransactionCounter) GetAllCounts() map[string]int {
+	// TODO: Implement this
+	return nil
+}
+
+// Reset sets all counters back to zero
+func (tc *TransactionCounter) Reset() {
+	// TODO: Implement this
+}
+
+// Test function - DO NOT MODIFY
+func main() {
+	counter := NewTransactionCounter()
+	var wg sync.WaitGroup
+
+	// Simulate concurrent transactions
+	currencies := []string{"USD", "EUR", "GBP", "JPY"}
+	
+	// Start 100 goroutines, each incrementing random currencies
+	for i := 0; i < 100; i++ {
+		wg.Add(1)
+		go func(id int) {
+			defer wg.Done()
+			
+			// Each goroutine increments 10 transactions
+			for j := 0; j < 10; j++ {
+				currency := currencies[j%len(currencies)]
+				counter.Increment(currency)
+				
+				// Occasionally read counts
+				if j%3 == 0 {
+					count := counter.GetCount(currency)
+					fmt.Printf("Goroutine %d: %s count is %d\n", id, currency, count)
+				}
+			}
+		}(i)
+	}
+
+	// Another goroutine occasionally reads all counts
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		time.Sleep(50 * time.Millisecond)
+		
+		allCounts := counter.GetAllCounts()
+		fmt.Printf("All counts: %+v\n", allCounts)
+		
+		time.Sleep(50 * time.Millisecond)
+		allCounts = counter.GetAllCounts()
+		fmt.Printf("All counts: %+v\n", allCounts)
+	}()
+
+	wg.Wait()
+	
+	// Final counts
+	fmt.Println("Final counts:", counter.GetAllCounts())
+	
+	// Reset and verify
+	counter.Reset()
+	fmt.Println("After reset:", counter.GetAllCounts())
+}
+
+/*
+Expected Behavior:
+- Each currency should be incremented 250 times total (100 goroutines * 10 increments / 4 currencies)
+- All operations should be thread-safe (no race conditions)
+- GetAllCounts should return a consistent snapshot
+- Reset should clear all counters
+
+Hints for Implementation:
+- Consider what happens when multiple goroutines access the same data
+- Think about read vs write operations
+- The test will fail or produce inconsistent results without proper synchronization
+
+Time: 10 minutes
+Focus: Correct implementation over optimization
+*/
+
