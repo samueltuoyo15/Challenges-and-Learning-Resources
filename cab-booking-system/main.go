@@ -184,7 +184,7 @@ func (CBS *CabBookingSystem) GetRiderHistory(riderID string) []*Trip {
 }
 
 func main(){
-	fmt.Println("Welcome to Samuel's Cab Booking System\n")
+	fmt.Println("Welcome to Samuel's Cab Booking System")
 
 	system := &CabBookingSystem{
 		Drivers: make(map[string]*Driver),
@@ -197,10 +197,10 @@ func main(){
 	//driver2 := system.RegisterDriver("Daniel", [2]int{5, 5})
 	
 	// To Register Rider
-	rider1 := system.RegisterRider("Swag", [2]int{8, 8})
+	rider1 := system.RegisterRider("Swag", [2]int{7, 2})
 
 	// To Book a trip, start trip and end the trip
-	trip1 := system.BookCab(rider1.ID, [2]int{8, 8})
+	trip1 := system.BookCab(rider1.ID, [2]int{3, 8})
 	system.StartTrip(trip1.ID)
 	system.EndTrip(trip1.ID)
 
