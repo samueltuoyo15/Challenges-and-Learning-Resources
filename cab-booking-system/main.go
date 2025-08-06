@@ -76,7 +76,7 @@ func (CBS *CabBookingSystem) RegisterRider(name string, location [2]int) *Rider 
 		Location: location,
 	}
 	CBS.Riders[rider.ID] = rider 
-	fmt.Printf("Rider %s registered with ID %s", rider.Name, rider.ID)
+	fmt.Printf("Rider %s registered with ID %s\n", rider.Name, rider.ID)
 	return rider
 }
 
@@ -194,22 +194,47 @@ func main(){
 
 	// To Register Drivers
 	driver1 := system.RegisterDriver("Paulson", [2]int{2, 3})
-	//driver2 := system.RegisterDriver("Daniel", [2]int{5, 5})
+	driver2 := system.RegisterDriver("Daniel", [2]int{5, 5})
+	driver3 := system.RegisterDriver("Sammy", [2]int{6, 6})
 	
 	// To Register Rider
 	rider1 := system.RegisterRider("Swag", [2]int{7, 2})
+	rider2 := system.RegisterRider("Samuel", [2]int{9, 2})
+	rider3 := system.RegisterRider("Treasure", [2]int{6, 6})
 
 	// To Book a trip, start trip and end the trip
 	trip1 := system.BookCab(rider1.ID, [2]int{3, 8})
-	system.StartTrip(trip1.ID)
-	system.EndTrip(trip1.ID)
+	if trip1 != nil {
+		system.StartTrip(trip1.ID)
+		system.EndTrip(trip1.ID)
+	}
 
-	// To get the driver status
-	driverStatus := system.GetDriverStatus(driver1.ID)
-	fmt.Printf("\nDriver %s is available: %v\n", driver1.Name, driverStatus)
+	trip2 := system.BookCab(rider2.ID, [2]int{9, 8})
+	if trip2 != nil {
+		system.StartTrip(trip2.ID)
+		system.EndTrip(trip2.ID)
+	}
+	
+	trip3 := system.BookCab(rider3.ID, [2]int{9, 9})
+	if trip3 != nil {
+		system.StartTrip(trip3.ID)
+		system.EndTrip(trip3.ID)
+	}
 
-	history := system.GetRiderHistory(rider1.ID)
-	for _, t := range history {
-		fmt.Printf("Trip ID: %s | From %v -> To: %v | Driver: %s | Status: %s\n", t.ID, t.StartLocation, t.EndLocation, t.Driver.Name, t.Status)
+	// To get the driaver status
+	fmt.Printf("\nDriver %s is available: %v\n", driver1.Name, system.GetDriverStatus(driver1.ID))
+	fmt.Printf("\nDriver %s is available: %v\n", driver2.Name, system.GetDriverStatus(driver2.ID))
+	fmt.Printf("\nDriver %s is available: %v\n", driver3.Name, system.GetDriverStatus(driver3.ID))
+
+	for _, rider := range []*Rider{rider1, rider2, rider3} {
+		fmt.Printf("\nTrip History for Rider %s:\n", rider.Name)
+		trips := system.GetRiderHistory(rider.ID)
+		if trips == nil {
+			continue
+		}
+
+		for _, trip := range trips {
+			fmt.Printf("Trip ID: %s | From %v -> To: %v | Driver: %s | Status: %s\n", trip.ID, trip.StartLocation, trip.EndLocation, trip.Driver.Name, trip.Status)
+		}
 	}
 }
